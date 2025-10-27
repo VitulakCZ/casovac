@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "raylib.h"
 #define VELIKOST_TEXTU 50
 #define MAX_POCET_CISLIC 5
@@ -17,6 +18,9 @@ int main() {
     int pocetCislic = 0;
     printf("%f", currentTime);
     InitWindow(WIDTH, HEIGHT, "KV Časovač");
+
+    InitAudioDevice();
+    Sound jeKonec = LoadSound("JE KONEC.mp3");
     SetTargetFPS(60);
     while (!WindowShouldClose()) {
         int key = GetCharPressed();
@@ -78,6 +82,7 @@ int main() {
                 float setTime = remainingTime;
                 if (remainingTime <= 0) {
                     timer = false;
+                    PlaySound(jeKonec);
                     continue;
                 }
                 char buffer[10];
