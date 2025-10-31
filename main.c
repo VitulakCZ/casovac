@@ -38,7 +38,7 @@ int main() {
                 cisliceSekund[pocetCislic] = '\0';
             }
         }
-        if (IsKeyPressed(KEY_ENTER) && !timer && pocetCislic != 0) {
+        if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_KP_ENTER) && !timer && pocetCislic != 0) {
             float sekund = atof(cisliceSekundPtr);
             if (sekund != 0) {
                 currentTime = GetTime();
@@ -50,7 +50,7 @@ int main() {
             file = fopen("cislo.txt", "w");
             fprintf(file, cisliceSekundPtr);
             fclose(file);
-        } else if (IsKeyPressed(KEY_ENTER)) {
+        } else if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_KP_ENTER)) {
             memset(cisliceSekund, 0, MAX_POCET_CISLIC);
             timer = false;
         }
