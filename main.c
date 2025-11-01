@@ -38,7 +38,7 @@ int main() {
                 cisliceSekund[pocetCislic] = '\0';
             }
         }
-        if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_KP_ENTER) && !timer && pocetCislic != 0) {
+        if ((IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_KP_ENTER)) && !timer && pocetCislic != 0) {
             float sekund = atof(cisliceSekundPtr);
             if (sekund != 0) {
                 currentTime = GetTime();
