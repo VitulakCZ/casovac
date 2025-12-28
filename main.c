@@ -9,22 +9,35 @@
 const int WIDTH = 800;
 const int HEIGHT = 600;
 
-int main() {
+int main(int argc, int **argv) {
     bool timer = false;
     float currentTime;
     float endTime;
     char cisliceSekund[MAX_POCET_CISLIC + 1] = "\0";
     const char *cisliceSekundPtr = cisliceSekund;
     int pocetCislic = 0;
-    printf("%f", currentTime);
-    InitWindow(WIDTH, HEIGHT, "KV Časovač");
+    if (argc > 2) {
+        fprintf(stderr, "ERROR: Nesprávné zadání!\n");
+        return 1;
+    }
+    if (argc > 1) {
+        float sekund = atof(argv[1]);
+        if (sekund <= 0) {
+            fprintf(stderr, "ERROR: Nesprávné zadání!\n");
+            return 1;
+        }
+        currentTime = GetTime();
+        endTime = currentTime + sekund;
+        timer = true;
+    } 
 
+    InitWindow(WIDTH, HEIGHT, "KV Časovač");
     InitAudioDevice();
     Sound jeKonec = LoadSound("JE KONEC.mp3");
     SetTargetFPS(60);
     while (!WindowShouldClose()) {
         int key = GetCharPressed();
-        while (key > 0) {
+        while (key > 0 && !timer) {
             if ((key >= 48) && (key <= 57) && (pocetCislic < MAX_POCET_CISLIC) && !timer) {
                 cisliceSekund[pocetCislic] = (char)key;
                 cisliceSekund[pocetCislic+1] = '\0';
